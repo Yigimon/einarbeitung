@@ -3,31 +3,6 @@
 ### 1. Erstellen eines UML-Klassendiagramms basierend auf den gegebenen Daten:
 - **Analysiere die Struktur des JSON-Dokuments** und identifiziere die relevanten Klassen und ihre Attribute sowie Beziehungen zueinander.
 - **Zeichne ein UML-Klassendiagramm**, das die Klassen, ihre Attribute und Methoden sowie die Beziehungen zwischen den Klassen (z.B. Assoziationen, Vererbungen) darstellt.
-Squad
---
-+	squadName: String
--	homeTown: String
-+	formed: int
-+	status: String
--   secretBase: String
-+	active: Bolean
-+	members: Array <String, int>
---
-+	searchSquadName()
--	searchHomeTown()
-+	whenFormed()
-+	areTheyActive()
-+	heroNameSquad()
-
-
-Members
---
-+	name: String
-+	age: int
--	secretIdentity: String
--	powers: Arrey <String>
-
-
 
 ### 2. Implementierung der Klasse in Python:
 - **Erstelle eine Python-Klasse oder Klassen**, die die Struktur des UML-Klassendiagramms widerspiegeln.
