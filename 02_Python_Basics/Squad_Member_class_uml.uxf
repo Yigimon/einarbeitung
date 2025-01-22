@@ -1,0 +1,20 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>350</x><y>180</y><w>210</w><h>190</h></coordinates><panel_attributes>Squad
+--
++ squad_name: str
++ home_town: str
++ formed: int
++ status: str
++ active: Bolean
++ members: Member[]
+--
++ print_squad_data(): None
++ add_member(member: Member): None
++ del_member(id: int): None
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>770</x><y>180</y><w>210</w><h>190</h></coordinates><panel_attributes>Member
+--
++ name: str
++ age: int
++ secret_identity: str
++ powers: str[]
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>280</y><w>240</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;220;10</additional_attributes></element></diagram>
