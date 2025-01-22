@@ -33,7 +33,7 @@
 3. **Wofür nutzt man XML?**
     - Datenaustausch zwischen Systemen
     - Einstellungen speichern
-    - Um Web-Dienste zu transportieren z.B (SOAP)
+    - Um Daten in Web-Dienste zu transportieren z.B (SOAP)
     - Dokumentformate wie DocX (Word) oder SVG (Grafiken)
 
 4. **Kann man in XML eigene Tags machen?**
