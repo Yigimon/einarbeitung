@@ -1,16 +1,12 @@
 import json
-import xmltodict
+from dicttoxml import dicttoxml
 
-# Read JSON file
-with open("Hero.json", "r") as file:
-    python_data = json.load(file)
 
-# Wrap the JSON list under a root element # das hat ChatGpt hinzugefügt, da es ansonsten nicht funktioniert hat und es immer einen Fehlercode angezeigt hatte
-root_element = {"root": {"squads": python_data}}
+with open("base.json", "r") as file:
+    source_data = json.load(file)
 
-# Convert to XML and save to file
-with open("Hero.xml", "w") as xml_file:
-    xml_content = xmltodict.unparse(root_element, pretty=True)
-    xml_file.write(xml_content)
+xml_data = dicttoxml(source_data, custom_root = "root", attr_type = False)
 
-print("XML file saved successfully.")
+
+with open("/root/einarbeitung/03_Dateiformate/data.xml", "wb") as xml_file:
+    xml_file.write(xml_data)
