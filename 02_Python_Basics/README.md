@@ -4,27 +4,6 @@
 - **Analysiere die Struktur des JSON-Dokuments** und identifiziere die relevanten Klassen und ihre Attribute sowie Beziehungen zueinander.
 - **Zeichne ein UML-Klassendiagramm**, das die Klassen, ihre Attribute und Methoden sowie die Beziehungen zwischen den Klassen (z.B. Assoziationen, Vererbungen) darstellt.
 
-Squad
---
-+ squad_name: String
-+ home_town: String
-+ formed: int
-+ status: String
-+ secret_base: bool
-+ active: int
-+ members: list[Member]
---
-+ add_member()
-+ remove_hero()
-+ print_squad_data()
-
-Member
---
-+ name: String
-+ age: int
-+ secret_identity: String
-+ powers: list[String]
-
 ### 2. Implementierung der Klasse in Python:
 - **Erstelle eine Python-Klasse oder Klassen**, die die Struktur des UML-Klassendiagramms widerspiegeln.
 - **Definiere die Attribute und Methoden** entsprechend den Daten und Anforderungen aus dem JSON-Dokument.
@@ -51,8 +30,8 @@ Member
 ## Fragen zur Objektorientierung
 
 1. Warum verwendet man Objektorientierung?
-Die OOP ermöglicht es Code wiederverwendbar zu machen, indem bestimmte Abläufe standartisiert werden und allgemein gehalten werden.
-Wie z.B die Print Funktion, diese kann in jedem Code unabhängig von der Funktion des Codes genutzt werden. 
+Die OOP ermöglicht es Code wiederverwendbar, leichter lesbar, modularer und erweiterbarer zu machen, indem Code standartisiert wird.
+Diese wird anhand der Konzepte der Objekte, Klassen, Methoden, Vererbung, Kapselung und des Polymorphismus umgesetzt. 
 
 2. Welche weiteren Vorgehensweisen gibt es?
 Prozedurale Programmierung, Funktionale und Logische 
@@ -128,7 +107,7 @@ if x == 5:  #Vergleichsoperator == und nicht =
 ### Code 4
 ```python
 
-numbers = (1, 2, 3, 4, 5) #Ein Tuple ist nicht veränderbar, am besten umwandeln in einen veränderbaren Datentyp
+numbers = (1, 2, 3, 4, 5) #Ein Tuple ist nicht veränderbar, am besten in einen veränderbaren Datentyp umwandeln z.B ein Dictionary "{}" oder eine Liste "[]"
 for i in range(len(numbers)):
     numbers[i] = numbers[i] * 2
 
