@@ -14,43 +14,50 @@ Die Daten sollen in einer Datenbank gespeichert werden.
 
 ### **Welche Datenbanken gibt es?**  
 - **SQL-Datenbanken** (z.B. MySQL, PostgreSQL, Microsoft SQL Server).  
-- **SQLite** (eine leichtgewichtige SQL-basierte Datenbank).  
+- **NoSQL** (z.B. MongoDB, CouchDB).
 
 ---
 
 ### **Wann macht welcher Typ Sinn?**  
 - **SQL**: Sinnvoll bei großen Datenmengen und gleichbleibenden Attributen, z.B. für Unternehmenssysteme.  
-- **SQLite**: Ideal für kleine Projekte und lokale Anwendungen, z. B. mobile Apps.  
+- **NoSQL**: wenn sich Datenstrukturen oft verändern, bei großen Datenmengen, hohe Geschwindigkeit oder z.b. bei Cloud Umgebungen.
 
 ---
 
 ### **Was ist ein Primary Key und was ein Foreign Key?**  
-- **Primary Key**: Eindeutiger Identifikator für eine Zeile in einer Tabelle.  
-- **Foreign Key**: Ein Attribut, das auf einen Primary Key in einer anderen Tabelle verweist.  
+- **Primary Key**: Eindeutiger Identifikator für ein Element in der Datenbank  
+- **Foreign Key**: Ein Attribut, das auf einen Primary Key in der Datenbank verweist.  
 
 ---
 
 ### **Was ist ein nativer und was ein künstlicher Primary Key?**  
-- **Nativer Primary Key**: Ein existierendes Attribut, z.B. "Personalausweisnummer".  
+- **Nativer Primary Key**: Ein existierendes Attribut, dessen Wert immer einzigartig ist.  
 - **Künstlicher Primary Key**: Ein neu generiertes Attribut, z.B. eine automatische ID.  
 
 ---
 
 ### **Welche Beziehungstypen zwischen Tabellen gibt es?**  
-1. **1:1**: Eine Zeile in Tabelle A entspricht genau einer Zeile in Tabelle B.  
-2. **1:n**: Eine Zeile in Tabelle A ist mit mehreren Zeilen in Tabelle B verbunden.  
-3. **n:m**: Mehrere Zeilen aus Tabelle A können mit mehreren Zeilen aus Tabelle B verknüpft sein.  
+1. **1:1**: Ein Datensatz aus einer Tabelle hat genau eine Verbindung zu einem anderen Datensatz in einer Tabelle. 
+2. **1:n**: Ein Datensatz aus einer Tabelle hat mehrere Verbindung zu einem anderen Datensatz in einer Tabelle.  
+3. **n:m**: Mehrere Datensatz aus einer Tabelle können mehrere Verbindung zu einem anderen Datensatz in einer Tabelle. 
 
 ---
 
 ### **Welche Wildcards gibt es in MySQL und was bedeuten sie?**  
 - **%**: Platzhalter für beliebig viele Zeichen (z.B. `LIKE 'A%', '%A'` findet alles, was mit A beginnt oder alles was ein A am ende hat).  
-- **_**: Platzhalter für genau ein Zeichen (z.B. `LIKE '_b'` findet alles, wo der zweite Buchstabe "b" ist).  
+- **_**: Platzhalter für genau ein Zeichen (z.B. `LIKE '_b, b_'` findet alles, wo "b" der zweite und letzte Buchstabe ist oder wo "b" der erste Buchstabe mit einem beliebigen darauffolgenden ist).  
 
 ---
 
 ### **Was ist ein Join?**  
-Ein Join verknüpft zwei Tabellen basierend auf einem gemeinsamen Attribut.  
+Ein **Join** verbindet zwei oder mehr Tabellen in SQL, indem man festlegt, wie sie zusammenpassen (z. B. gleiche Werte in einer Spalte). Das Ziel ist es, relevante Daten aus beiden Tabellen zu kombinieren.
+
+### Arten von Joins:
+- **INNER JOIN**: Zeigt nur übereinstimmende Daten aus beiden Tabellen.
+- **LEFT JOIN**: Zeigt alle Daten aus der linken Tabelle, auch wenn rechts nichts passt.
+- **RIGHT JOIN**: Umgekehrt zum LEFT JOIN.
+- **CROSS JOIN**: Alle möglichen Kombinationen.
+- **FULL JOIN**: Alles aus beiden Tabellen, auch ohne Übereinstimmung. 
 
 ---
 

@@ -1,7 +1,7 @@
-CREATE DATABASE einarbeitung_dateiformate;
+CREATE DATABASE Superhelden;
 
 
-einarbeitung_dateiformate;
+Superhelden;
 
 CREATE TABLE squad (
     sid INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,12 +19,12 @@ CREATE TABLE member (
     name VARCHAR(255),
     age INT,
     SecretIdentity VARCHAR(255),
-    FOREIGN KEY (mid) REFERENCES squad(sid)
+    FOREIGN KEY (sid) REFERENCES squad(sid)
 );
 
 CREATE TABLE power (
     pid INT AUTO_INCREMENT PRIMARY KEY,
     mid INT,
     power VARCHAR(255),
-    FOREIGN KEY (pid) REFERENCES member(mid)
+    FOREIGN KEY (mid) REFERENCES member(mid)
 );

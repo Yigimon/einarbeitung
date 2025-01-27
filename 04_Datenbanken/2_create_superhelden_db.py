@@ -19,165 +19,181 @@ mycursor = mydb.cursor()
 #  print(x)
 
 #! Show one Table
-#
-#mycursor.execute("SELECT * FROM squad")
+#mycursor.execute("SELECT * FROM member")
 #anzeige = mycursor.fetchall()
-
-
-
+#for x in anzeige:
+#    print(x)
 
 
 #! Adds (add/delete/update/read)
-while True:
-    print(f"Möchtest du einen Wert in eine der drei Tabellen hinzufügen, löschen, bearbeiten oder auslesen? \n\nZur Auswahl stehen |squad|member|powers|.\n\nBitte wähle eine der Tabellen aus: \n\nMit >Quit< kannst du jederzeit abbrechen.")
-    user_input = input()
-    try:
-        match user_input.lower():
-            case "quit":
-                print("Programm wird beendet...")
-                exit()
-            #! Anything to edit the squad
-            case "squad":
-                action = input("Möchtest du hinzufügen, löschen, bearbeiten oder auslesen? (add/delete/update/read): ").lower()
-                match action:
-                    case "add":
-                        squad_name = input("Bitte gib den Squad Namen ein: ")
-                        home_town = input("Bitte gib die Heimatstadt ein: ")
-                        formed = input("Bitte gib das Gründungsjahr ein: ")
-                        position = input("Bitte gib ein, ob der Squad >good<, >evil<, >neutral< ist: ")
-                        secret_base = input("Bitte gib das Geheimversteck ein: ")
-                        active = input("Bitte gib ein, ob der Squad aktiv ist (true/false): ")
+try:
+    while True:
+        print(f"Möchtest du einen Wert in eine der drei Tabellen hinzufügen, löschen, bearbeiten oder auslesen? \n\nZur Auswahl stehen |squad|member|powers|.\n\nBitte wähle eine der Tabellen aus: \n\nMit >Quit< kannst du jederzeit abbrechen.")
+        user_input = input()
+        try:
+            match user_input.lower():
+                case "quit":
+                    print("Programm wird beendet...")
+                    break  # Changed from exit() to break
+                
+                #! Anything to edit the squad
+                case "squad":
+                    action = input("Möchtest du hinzufügen, löschen, bearbeiten oder auslesen? (add/delete/update/read): ").lower()
+                    match action:
+                        case "add":
+                            squad_name = input("Bitte gib den Squad Namen ein: ")
+                            home_town = input("Bitte gib die Heimatstadt ein: ")
+                            formed = input("Bitte gib das Gründungsjahr ein: ")
+                            position = input("Bitte gib ein, ob der Squad >good<, >evil<, >neutral< ist: ")
+                            secret_base = input("Bitte gib das Geheimversteck ein: ")
+                            active = input("Bitte gib ein, ob der Squad aktiv ist (true/false): ")
 
-                        sql = """INSERT INTO squad 
-                                    (SquadName, HomeTown, formed, position, SecretBase, active) 
-                                    VALUES (%s, %s, %s, %s, %s, %s)"""
+                            sql = """INSERT INTO squad 
+                                        (SquadName, HomeTown, formed, position, squadSecretBase, active) 
+                                        VALUES (%s, %s, %s, %s, %s, %s)"""
 
-                        values = (squad_name, home_town, formed, position, secret_base, active)
+                            values = (squad_name, home_town, formed, position, secret_base, active)
 
-                    case "delete":
-                        squad_id = input("Bitte gib die ID des Squads ein, der gelöscht werden soll: ")
-                        sql = "DELETE FROM squad WHERE SquadID = %s"
-                        values = (squad_id,)
+                        case "delete":
+                            squad_id = input("Bitte gib die ID des Squads ein, der gelöscht werden soll: ")
+                            sql = "DELETE FROM squad WHERE SquadID = %s"
+                            values = (squad_id,)
 
-                    case "update":
-                        squad_id = input("Bitte gib die ID des Squads ein, das bearbeitet werden soll: ")
-                        column = input("Welches Feld möchtest du bearbeiten (SquadName, HomeTown, formed, position, SecretBase, active)? ")
-                        new_value = input(f"Bitte gib den neuen Wert für {column} ein: ")
-                        sql = f"UPDATE squad SET {column} = %s WHERE SquadID = %s"
-                        values = (new_value, squad_id)
+                        case "update":
+                            allowed_value_squad = ["SquadName","HomeTown", "formed", "position", "SecretBase", "active"]
 
-                    case "read":
-                        sql = "SELECT * FROM squad"
-                        values = None
-                        mycursor.execute(sql)
-                        results = mycursor.fetchall()
-                        for row in results:
-                            print(row)
+                            squad_id = input("Bitte gib die ID des Squads ein, das bearbeitet werden soll: ")
+                            
+                            while True:
+                                column = input("Welches Feld möchtest du bearbeiten (SquadName, HomeTown, formed, position, SecretBase, active)? ")
 
-                    case _:
-                        print("Ungültige Eingabe für die Aktion!")
-                        exit()
+                                if column not in allowed_value_squad:
+                                    print("Ungültige Eingabe.\nBitte wiederholen Sie ihre Eingabe")
 
-            #! Anything to edit the members
-            case "member":
-                action = input("Möchtest du hinzufügen, löschen, bearbeiten oder auslesen? (add/delete/update/read): ").lower()
-                match action:
-                    case "add":
-                        member_name = input("Name des Helden: ")
-                        squad_id = input("Squad ID: ")
-                        age = input("Alter: ")
-                        secret_identity = input("Geheime Identität: ")
+                                else:
+                                    break
 
-                        sql = """INSERT INTO member 
-                                (name, squad_id, age, SecretIdentity) 
-                                VALUES (%s, %s, %s, %s)"""
+                                new_value = input(f"Bitte gib den neuen Wert für {column} ein: ")    
+                                sql = f"UPDATE squad SET %s = %s WHERE SquadID = %s"
+                                values = (column, new_value, squad_id)
 
-                        values = (member_name, squad_id, age, secret_identity)
+                        case "read":
+                            sql = "SELECT * FROM squad"
+                            values = None
+                            mycursor.execute(sql)
+                            results = mycursor.fetchall()
+                            for row in results:
+                                print(row)
 
-                    case "delete":
-                        member_id = input("Bitte gib die ID des Mitglieds ein, das gelöscht werden soll: ")
-                        sql = "DELETE FROM member WHERE MemberID = %s"
-                        values = (member_id,)
+                        case _:
+                            print("Ungültige Eingabe für die Aktion!")
+                            exit()
 
-                    case "update":
-                        member_id = input("Bitte gib die ID des Mitglieds ein, das bearbeitet werden soll: ")
-                        column = input("Welches Feld möchtest du bearbeiten (name, squad_id, age, SecretIdentity)? ")
-                        new_value = input(f"Bitte gib den neuen Wert für {column} ein: ")
-                        sql = f"UPDATE member SET {column} = %s WHERE MemberID = %s"
-                        values = (new_value, member_id)
+                #! Anything to edit the members
+                case "member":
+                    action = input("Möchtest du hinzufügen, löschen, bearbeiten oder auslesen? (add/delete/update/read): ").lower()
+                    match action:
+                        case "add":
+                            member_name = input("Name des Helden: ")
+                            squad_id = input("Squad ID: ")
+                            age = input("Alter: ")
+                            secret_identity = input("Geheime Identität: ")
 
-                    case "read":
-                        sql = "SELECT * FROM member"
-                        values = None
-                        mycursor.execute(sql)
-                        results = mycursor.fetchall()
-                        for row in results:
-                            print(row)
+                            sql = """INSERT INTO member 
+                                    (name, squad_id, age, SecretIdentity) 
+                                    VALUES (%s, %s, %s, %s)"""
 
-                    case _:
-                        print("Ungültige Eingabe für die Aktion!")
-                        exit()
+                            values = (member_name, squad_id, age, secret_identity)
 
-            #! Anything to edit the powers
-            case "powers":
-                action = input("Möchtest du hinzufügen, löschen, bearbeiten oder auslesen? (add/delete/update/read): ").lower()
-                match action:
-                    case "add":
-                        member_id = input("Member ID: ")
-                        power = input("Superkraft: ")
+                        case "delete":
+                            member_id = input("Bitte gib die ID des Mitglieds ein, das gelöscht werden soll: ")
+                            sql = "DELETE FROM member WHERE MemberID = %s"
+                            values = (member_id,)
 
-                        sql = """INSERT INTO powers 
-                                (mid, power) 
-                                VALUES (%s, %s)"""
+                        case "update":
+                            allowed_value_member = ["name", "squad_id", "age", "SecretIdentiy"]
 
-                        values = (member_id, power)
+                            member_id = input("Bitte gib die ID des Mitglieds ein, das bearbeitet werden soll: ")
 
-                    case "delete":
-                        power_id = input("Bitte gib die ID der Superkraft ein, die gelöscht werden soll: ")
-                        sql = "DELETE FROM powers WHERE PowerID = %s"
-                        values = (power_id,)
+                            while True:
+                                column = input("Welches Feld möchtest du bearbeiten (name, squad_id, age, SecretIdentity)? ")
 
-                    case "update":
-                        power_id = input("Bitte gib die ID der Superkraft ein, die bearbeitet werden soll: ")
-                        new_value = input("Bitte gib die neue Superkraft ein: ")
-                        sql = "UPDATE powers SET power = %s WHERE PowerID = %s"
-                        values = (new_value, power_id)
+                                if member_id not in allowed_value_member:
+                                    print("Ungültige Eingabe.\nBitte wiederholen Sie ihre Eingabe")
+                                else:
+                                    break
 
-                    case "read":
-                        sql = "SELECT * FROM powers"
-                        values = None
-                        mycursor.execute(sql)
-                        results = mycursor.fetchall()
-                        for row in results:
-                            print(row)
+                                new_value = input(f"Bitte gib den neuen Wert für {column} ein: ")
+                                sql = f"UPDATE member SET % = %s WHERE MemberID = %s"
+                                values = (column, new_value, member_id)
 
-                    #!Handles an invalid input and exits the programm
-                    case _:
-                        print("Ungültige Eingabe für die Aktion!")
-                        exit()
+                        case "read":
+                            sql = "SELECT * FROM member"
+                            values = None
+                            mycursor.execute(sql)
+                            results = mycursor.fetchall()
+                            for row in results:
+                                print(row)
 
-            case _:
-                print("Ungültige Eingabe! Wähle squad, member oder powers.")
-                exit()
-        #! checks if the values are filled
-        if values:
-            mycursor.execute(sql, values)
-            mydb.commit()
-            print("Aktion erfolgreich ausgeführt!")
-    
-    #! intercepts error messages, passes them to err and prints them out
-    except mysql.connector.Error as err:
-        print(f"Fehler: {err}")
-    
-    #! closes the cursor and database connection 
-    finally:
-        mycursor.close()
-        mydb.close()
+                        case _:
+                            print("Ungültige Eingabe für die Aktion!")
+                            exit()
 
+                #! Anything to edit the powers
+                case "powers":
+                    action = input("Möchtest du hinzufügen, löschen, bearbeiten oder auslesen? (add/delete/update/read): ").lower()
+                    match action:
+                        case "add":
+                            member_id = input("Member ID: ")
+                            power = input("Superkraft: ")
 
+                            sql = """INSERT INTO powers 
+                                    (mid, power) 
+                                    VALUES (%s, %s)"""
 
+                            values = (member_id, power)
 
+                        case "delete":
+                            power_id = input("Bitte gib die ID der Superkraft ein, die gelöscht werden soll: ")
+                            sql = "DELETE FROM powers WHERE PowerID = %s"
+                            values = (power_id,)
 
+                        case "update":
+                            power_id = input("Bitte gib die ID der Superkraft ein, die bearbeitet werden soll: ")
+                            new_value = input("Bitte gib die neue Superkraft ein: ")
+                            sql = "UPDATE powers SET power = %s WHERE PowerID = %s"
+                            values = (new_value, power_id)
+
+                        case "read":
+                            sql = "SELECT * FROM powers"
+                            values = None
+                            mycursor.execute(sql)
+                            results = mycursor.fetchall()
+                            for row in results:
+                                print(row)
+
+                        #!Handles an invalid input and exits the programm
+                        case _:
+                            print("Ungültige Eingabe für die Aktion!")
+                            exit()
+
+                case _:
+                    print("Ungültige Eingabe! Wähle squad, member oder powers.")
+                    exit()
+            #! checks if the values are filled
+            if values:
+                mycursor.execute(sql, values)
+                mydb.commit()
+                print("Aktion erfolgreich ausgeführt!")
+        
+        #! intercepts error messages, passes them to err and prints them out
+        except mysql.connector.Error as err:
+            print(f"Fehler: {err}")
+            mydb.rollback()  # Add rollback on error
+
+finally:
+    mycursor.close()
+    mydb.close()
 
 
 
