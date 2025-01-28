@@ -124,7 +124,7 @@ try:
                                     break
 
                                 new_value = input(f"Bitte gib den neuen Wert für {column} ein: ")
-                                sql = f"UPDATE member SET % = %s WHERE MemberID = %s"
+                                sql = f"UPDATE member SET %s = %s WHERE MemberID = %s"
                                 values = (column, new_value, member_id)
 
                         case "read":
