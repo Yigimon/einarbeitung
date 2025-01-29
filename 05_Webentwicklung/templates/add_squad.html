@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Squad</title>
+    <style>
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <div class="form-group">
+            <label>Squad Name:</label>
+            <input type="text" name="squadname" required>
+        </div>
+        <div class="form-group">
+            <label>Hometown:</label>
+            <input type="text" name="hometown" required>
+        </div>
+        <div class="form-group">
+            <label>Formed Year:</label>
+            <input type="number" name="formed" required>
+        </div>
+        <div class="form-group">
+            <label>Position:</label>
+            <input type="text" name="position" required>
+        </div>
+        <div class="form-group">
+            <label>Secret Base:</label>
+            <input type="text" name="secretbase" required>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="active" checked>
+                Active
+            </label>
+        </div>
+        <button type="submit">Add Squad</button>
+    </form>
+</body>
+</html>

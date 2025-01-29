@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ squad.SquadName }} - Squad Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+        h1, h2 { color: #333; }
+        .container { max-width: 600px; margin: auto; }
+        .member { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ squad.SquadName }}</h1>
+        <p><strong>Herkunft:</strong> {{ squad.HomeTown }}</p>
+        <p><strong>Gegründet:</strong> {{ squad.formed }}</p>
+        <p><strong>Geheimversteck:</strong> {{ squad.SecretBase }}</p>
+        <p><strong>Aktiv:</strong> {{ 'Ja' if squad.active else 'Nein' }}</p>
+
+        <h2>Mitglieder</h2>
+        {% if members %}
+            {% for member in members %}
+                <div class="member">
+                    <p><strong>Name:</strong> {{ member.name }}</p>
+                    <p><strong>Geheime Identität:</strong> {{ member.SecretIdentity }}</p>
+                    <h3>Kräfte:</h3>
+                    <ul>
+                        {% for power in member.powers %}
+                            <li>{{ power.power }}</li>
+                        {% else %}
+                            <li>Keine Kräfte</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Keine Mitglieder gefunden.</p>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}">Zurück zur Übersicht</a>
+    </div>
+</body>
+</html>

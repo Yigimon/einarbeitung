@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Startseite{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mt-5">Willkommen in der Superhelden-Datenbank</h1>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Squads</h5>
+                    <p class="card-text">Verwalte Superhelden-Teams</p>
+                    <!-- Hier könnte 'squads' statt 'index' der richtige Endpunkt sein -->
+                    <a href="{{ url_for('squads') }}" class="btn btn-primary">Zu den Squads</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Members</h5>
+                    <p class="card-text">Verwalte Superhelden</p>
+                    <a href="{{ url_for('members') }}" class="btn btn-primary">Zu den Members</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Powers</h5>
+                    <p class="card-text">Verwalte Superkräfte</p>
+                    <a href="{{ url_for('powers') }}" class="btn btn-primary">Zu den Powers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>Superhelden Teams</h1>
+    
+    <!-- Debug Info -->
+    <div style="background: #f0f0f0; padding: 10px; margin: 10px 0;">
+        <p>Anzahl Teams: {{ squads|length }}</p>
+    </div>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Stadt</th>
+            <th>Jahr</th>
+            <th>Position</th>
+            <th>Basis</th>
+            <th>Status</th>
+        </tr>
+        {% for squad in squads %}
+        <tr>
+            <td>{{ squad.sid }}</td>
+            <td>{{ squad.SquadName }}</td>
+            <td>{{ squad.HomeTown }}</td>
+            <td>{{ squad.formed }}</td>
+            <td>{{ squad.position }}</td>
+            <td>{{ squad.SecretBase }}</td>
+            <td>{{ "Aktiv" if squad.active else "Inaktiv" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if not squads %}
+    <p>Keine Teams in der Datenbank gefunden.</p>
+    {% endif %}
+</div>
+{% endblock %}

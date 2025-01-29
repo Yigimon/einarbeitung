@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Squad</title>
+    <style>
+        /* Same styling as add_squad.html */
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Team bearbeiten</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label>Squad Name:</label>
+            <input type="text" name="squadname" value="{{ squad.SquadName }}" required>
+        </div>
+        <div class="form-group">
+            <label>Hometown:</label>
+            <input type="text" name="hometown" value="{{ squad.HomeTown }}" required>
+        </div>
+        <div class="form-group">
+            <label>Formed Year:</label>
+            <input type="number" name="formed" value="{{ squad.formed }}" required>
+        </div>
+        <div class="form-group">
+            <label>Position:</label>
+            <input type="text" name="position" value="{{ squad.position }}" required>
+        </div>
+        <div class="form-group">
+            <label>Secret Base:</label>
+            <input type="text" name="secretbase" value="{{ squad.SecretBase }}" required>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="active" {% if squad.active %}checked{% endif %}>
+                Active
+            </label>
+        </div>
+        <button type="submit">Speichern</button>
+        <a href="{{ url_for('index') }}" style="margin-left: 10px;">Abbrechen</a>
+    </form>
+</body>
+</html>
